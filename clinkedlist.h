@@ -8,10 +8,6 @@
 #ifndef __ET_CLINKEDLIST__
 #define __ET_CLINKEDLIST__
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 /*******************************************************************************
  * TYPE DEFINITIONS
  ***/

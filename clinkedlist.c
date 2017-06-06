@@ -17,6 +17,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef CONFIG_DEBUG_CLIST
 #include <time.h>
