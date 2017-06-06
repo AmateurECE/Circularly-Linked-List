@@ -7,7 +7,7 @@
 ################################################################################
 
 P = clinkedlist
-OBJECTS=
+OBJECTS = clinkedlist.c
 CFLAGS = -Wall -O3
 LDLIBS=
 CC=gcc
