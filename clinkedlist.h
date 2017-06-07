@@ -1,9 +1,14 @@
-/*
- * NAME: clinkedlist.h -- header file for a custom implementation of a circularly linked list!
- * AUTHOR: Ethan D. Twardy
- * CREATED: 05/05/17
- * LAST EDITED: 05/05/17
- */
+/*******************************************************************************
+ * NAME:	    clinkedlist.h
+ *
+ * AUTHOR:	    Ethan D. Twardy
+ *
+ * DESCRIPTION:	    Header file for the implementation of a doubly-linked-list.
+ *
+ * CREATED:	    05/05/17
+ *
+ * LAST EDITED:	    06/06/17
+ ***/
 
 #ifndef __ET_CLINKEDLIST__
 #define __ET_CLINKEDLIST__
@@ -45,3 +50,5 @@ extern int clist_remnxt(CList *, CListElmt *, void **);
 extern void clist_dest(CList *);
 
 #endif /* __ET_CLINKEDLIST__ */
+
+/******************************************************************************/

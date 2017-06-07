@@ -1,14 +1,14 @@
 /*******************************************************************************
- * NAME: clinkedlist.c
+ * NAME:	    clinkedlist.c
  *
- * AUTHOR: Ethan D. Twardy
+ * AUTHOR:	    Ethan D. Twardy
  *
- * DESCRIPTION: API functions and test code for the types and prototypes
- *              outlined in clinkedlist.h; a circularly-linked list.
+ * DESCRIPTION:	    API functions and test code for the types and prototypes
+ *		    outlined in clinkedlist.h; a circularly-linked list.
  *
- * CREATED: 05/05/17
+ * CREATED:	    05/05/17
  *
- * LAST EDITED: 06/06/17
+ * LAST EDITED:	    06/06/17
  ***/
 
 /*******************************************************************************
