@@ -10,8 +10,8 @@
  * LAST EDITED:	    06/06/17
  ***/
 
-#ifndef __ET_CLINKEDLIST__
-#define __ET_CLINKEDLIST__
+#ifndef __ET_CLINKEDLIST_H__
+#define __ET_CLINKEDLIST_H__
 
 /*******************************************************************************
  * TYPE DEFINITIONS
@@ -49,6 +49,6 @@ extern int clist_insnxt(CList *, CListElmt *, void *);
 extern int clist_remnxt(CList *, CListElmt *, void **);
 extern void clist_dest(CList *);
 
-#endif /* __ET_CLINKEDLIST__ */
+#endif /* __ET_CLINKEDLIST_H__ */
 
 /******************************************************************************/
