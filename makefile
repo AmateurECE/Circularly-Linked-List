@@ -1,10 +1,14 @@
-################################################################################
-# NAME: makefile
-# AUTHOR: Ethan D. Twardy
-# DESCRIPTION: makefile for the executable C code contained in clinkedlist.c
-# CREATED: 06/06/17
-# LAST EDITED: 06/06/17
-################################################################################
+###############################################################################
+# NAME:		    Makefile
+#
+# AUTHOR:	    Ethan D. Twardy
+#
+# DESCRIPTION:	    Makefile for the Circularly Linked List test code.
+#
+# CREATED:	    06/06/2017
+#
+# LAST EDITED:	    01/02/2018
+###
 
 P = clinkedlist
 OBJECTS = clinkedlist.c
@@ -26,3 +30,5 @@ clean:
 	rm -rf *.c~
 	rm -rf *.h~
 	rm -rf makefile~
+
+###############################################################################
