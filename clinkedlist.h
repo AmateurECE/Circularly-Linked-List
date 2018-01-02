@@ -7,7 +7,7 @@
  *
  * CREATED:	    05/05/17
  *
- * LAST EDITED:	    06/06/17
+ * LAST EDITED:	    01/02/2018
  ***/
 
 #ifndef __ET_CLINKEDLIST_H__
@@ -48,6 +48,9 @@ extern void clist_init(CList *, void (*)(void *));
 extern int clist_insnxt(CList *, CListElmt *, void *);
 extern int clist_remnxt(CList *, CListElmt *, void **);
 extern void clist_dest(CList *);
+
+/* TODO: Implement clist_traverse
+ */
 
 #endif /* __ET_CLINKEDLIST_H__ */
 
