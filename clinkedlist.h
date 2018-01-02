@@ -40,6 +40,9 @@ typedef struct _CList_ {
 #define clist_isempty(list) ((list)->size == 0 ? 1 : 0)
 #define clist_head(list) ((list)->head)
 
+/* TODO: Implement more macros (found in Doubly-Linked-List)
+ */
+
 /******************************************************************************
  * API FUNCTION PROTOTYPES
  ***/
