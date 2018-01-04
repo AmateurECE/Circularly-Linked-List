@@ -1,2 +1,2 @@
-./clinkedlist.h: Implement clist_traverse | id:9b3fb12502806cb51d188ef2d0cf06167997b1ef
-./clinkedlist.h: Implement more macros (found in Doubly-Linked-List) | id:dfd737d0494ebb8d958a8aa3c69e3303731c956d
+./clist.h: Implement more macros (found in Doubly-Linked-List) | id:1f3f8d5f3a97f7573701a36eada683f939118383
+./clist.h: Implement clist_traverse | id:e1d01e210dc165bc5fc5094e3d820fe6312d3307

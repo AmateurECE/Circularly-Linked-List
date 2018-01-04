@@ -7,28 +7,27 @@
 #
 # CREATED:	    06/06/2017
 #
-# LAST EDITED:	    01/02/2018
+# LAST EDITED:	    01/03/2018
 ###
 
-P = clinkedlist
-OBJECTS = clinkedlist.c
-CFLAGS = -Wall -O3
-LDLIBS=
 CC=gcc
+ifeq ($(MAKECMDGOALS),debug)
+    CFLAGS = -g -O0 -Wall -D CONFIG_DEBUG_CLIST
+else
+    CFLAGS = -Wall -O3
+endif
 
-$(P):
-	$(CC) $(CFLAGS) -o $(P) $(OBJECTS) $(LDLIBS)
+.PHONY: debug clean force
 
-.PHONY: debug clean
+clist:
 
-CFLAGS_DEBUG = -g -O0 -Wall -D CONFIG_DEBUG_CLIST
+debug: clist
 
-debug:
-	$(CC) $(CFLAGS_DEBUG) -o $(P) $(OBJECTS) $(LDLIBS)
+clean: force
+	rm -f clist
+	rm -f *.o
+	rm -rf *.dSYM
 
-clean:
-	rm -rf *.c~
-	rm -rf *.h~
-	rm -rf makefile~
+force:
 
 ###############################################################################

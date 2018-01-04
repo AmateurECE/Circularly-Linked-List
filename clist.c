@@ -8,7 +8,7 @@
  *
  * CREATED:	    05/05/17
  *
- * LAST EDITED:	    01/02/2018
+ * LAST EDITED:	    01/03/2018
  ***/
 
 /******************************************************************************
@@ -24,7 +24,7 @@
 #include <assert.h>
 #endif
 
-#include "clinkedlist.h"
+#include "clist.h"
 
 /******************************************************************************
  * LOCAL PROTOTYPES
@@ -39,23 +39,29 @@ static inline void error_exit(char *);
  ***/
 
 /******************************************************************************
- * FUNCTION:	    clist_init
+ * FUNCTION:	    clist_create
  *
- * DESCRIPTION:	    Initializes the list in 'list.'
+ * DESCRIPTION:	    Creates a new clist struct, and returns a pointer to it.
  *
- * ARGUMENTS:	    list: (Clist *) -- the list to be initialized.
- *		    destroy: (void (*)(void *)) -- function pointer to free the
+ * ARGUMENTS:	    destroy: (void (*)(void *)) -- function pointer to free the
  *		    data held in a node.
  *
- * RETURN:	    void
+ * RETURN:	    (clist *) -- pointer to the new struct, or NULL if there
+ *		    was an error.
  *
  * NOTES:	    O(1)
  ***/
-void clist_init(CList * list, void (*destroy)(void *))
+clist * clist_create(void (*destroy)(void *))
 {
+  clist * list = NULL;
+  if ((list = malloc(sizeof(clist))) == NULL)
+    return NULL;
+  
   list->head = NULL;
   list->destroy = destroy;
   list->size = 0;
+
+  return list;
 }
 
 /******************************************************************************
@@ -64,17 +70,17 @@ void clist_init(CList * list, void (*destroy)(void *))
  * DESCRIPTION:	    Inserts 'data' in a new node placed after 'node.'
  *
  * ARGUMENTS:	    list: (Clist *) -- the list to be operated on.
- *		    node: (CListEmnt *) -- the reference node.
+ *		    node: (clistelmt *) -- the reference node.
  *		    data: (void *) -- the data to be inserted.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int clist_insnxt(CList * list, CListElmt * node, void * data)
+int clist_insnxt(clist * list, clistelmt * node, void * data)
 {
-  CListElmt * new_elmt;
-  if ((new_elmt = (CListElmt *)malloc(sizeof(CListElmt))) == NULL)
+  clistelmt * new_elmt;
+  if ((new_elmt = (clistelmt *)malloc(sizeof(clistelmt))) == NULL)
     return -1;
 
   new_elmt->data = data;
@@ -103,20 +109,20 @@ int clist_insnxt(CList * list, CListElmt * node, void * data)
  * DESCRIPTION:	    Removes the node after 'node' and places its data in 'data'
  *
  * ARGUMENTS:	    list: (Clist *) -- the list to be operated on.
- *		    node: (CListEmnt *) -- the reference node.
+ *		    node: (clistelmt *) -- the reference node.
  *		    data: (void *) -- the data that was removed.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int clist_remnxt(CList * list, CListElmt * node, void ** pData)
+int clist_remnxt(clist * list, clistelmt * node, void ** pData)
 {
   if (clist_isempty(list))
     return -1;
 
   *pData = node->next->data;
-  CListElmt * old;
+  clistelmt * old;
 
   if (node == clist_head(list)) {
 
@@ -136,32 +142,31 @@ int clist_remnxt(CList * list, CListElmt * node, void ** pData)
 }
 
 /******************************************************************************
- * FUNCTION:	    clist_dest
+ * FUNCTION:	    clist_destroy
  *
- * DESCRIPTION:	    Removes all nodes and sets all bytes of memory in the CList
+ * DESCRIPTION:	    Removes all nodes and sets all bytes of memory in the clist
  *		    structure to 0. If 'destroy' is set to NULL, does not
  *		    destroy the data.
  *
- * ARGUMENTS:	    list: (Clist *) -- the list to be destroyed.
+ * ARGUMENTS:	    list: (Clist **) -- the list to be destroyed.
  *
  * RETURN:	    void.
  *
  * NOTES:	    O(n)
  ***/
-void clist_dest(CList * list)
+void clist_destroy(clist ** list)
 {
-  if (clist_isempty(list))
+  if (clist_isempty(*list))
     return;
 
   void * pData;
-  while (!clist_isempty(list)) {
-
-    clist_remnxt(list, clist_head(list), (void **)&pData);
-    list->destroy(pData);
-
+  while (!clist_isempty(*list)) {
+    clist_remnxt(*list, clist_head(*list), (void **)&pData);
+    (*list)->destroy(pData);
   }
 
-  memset(list, 0, sizeof(CList));
+  free(*list);
+  *list = NULL;
 }
 
 /******************************************************************************
@@ -172,9 +177,9 @@ void clist_dest(CList * list)
 int main(int argc, char * argv[])
 {
   int * pNum;
-  CList * list;
+  clist * list;
 
-  if ((list = malloc(sizeof(CList))) == NULL)
+  if ((list = clist_create(free)) == NULL)
     error_exit("Could not allocate memory for list!");
 
   srand((unsigned)time(NULL));
@@ -196,8 +201,7 @@ int main(int argc, char * argv[])
     free(pNum);
   }
 
-  clist_dest(list);
-  free(list);
+  clist_destroy(&list);
 
   return 0;
 }

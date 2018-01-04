@@ -3,11 +3,12 @@
  *
  * AUTHOR:	    Ethan D. Twardy
  *
- * DESCRIPTION:	    Header file for the implementation of a doubly-linked-list.
+ * DESCRIPTION:	    Header file for the implementation of a
+ *		    circulary-linked-list.
  *
  * CREATED:	    05/05/17
  *
- * LAST EDITED:	    01/02/2018
+ * LAST EDITED:	    01/03/2018
  ***/
 
 #ifndef __ET_CLINKEDLIST_H__
@@ -17,20 +18,20 @@
  * TYPE DEFINITIONS
  ***/
 
-typedef struct _CListElmt_ {
+typedef struct _clistelmt_ {
 
   void * data;
-  struct _CListElmt_ * next;
+  struct _clistelmt_ * next;
 
-} CListElmt;
+} clistelmt;
 
-typedef struct _CList_ {
+typedef struct {
 
   void (*destroy)(void *);
   int size;
-  CListElmt * head;
+  clistelmt * head;
 
-} CList;
+} clist;
 
 /******************************************************************************
  * MACRO DEFINITIONS
@@ -47,10 +48,10 @@ typedef struct _CList_ {
  * API FUNCTION PROTOTYPES
  ***/
 
-extern void clist_init(CList *, void (*)(void *));
-extern int clist_insnxt(CList *, CListElmt *, void *);
-extern int clist_remnxt(CList *, CListElmt *, void **);
-extern void clist_dest(CList *);
+extern clist * clist_create(void (*destroy)(void *));
+extern int clist_insnxt(clist * list, clistelmt * node, void * data);
+extern int clist_remnxt(clist * list, clistelmt * node, void ** pData);
+extern void clist_destroy(clist ** pList);
 
 /* TODO: Implement clist_traverse
  */
