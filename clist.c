@@ -8,7 +8,7 @@
  *
  * CREATED:	    05/05/17
  *
- * LAST EDITED:	    01/03/2018
+ * LAST EDITED:	    03/08/2018
  ***/
 
 /******************************************************************************
@@ -156,14 +156,12 @@ int clist_remnxt(clist * list, clistelmt * node, void ** pData)
  ***/
 void clist_destroy(clist ** list)
 {
-  if (clist_isempty(*list))
+  if (list == NULL || *list == NULL)
     return;
 
   void * pData;
-  while (!clist_isempty(*list)) {
-    clist_remnxt(*list, clist_head(*list), (void **)&pData);
+  while (!clist_remnxt(*list, clist_head(*list), (void **)&pData))
     (*list)->destroy(pData);
-  }
 
   free(*list);
   *list = NULL;
